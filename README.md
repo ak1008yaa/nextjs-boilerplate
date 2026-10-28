@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Boilerplate
 
-## Getting Started
+[![CI](https://github.com/ak1008yaa/nextjs-boilerplate/actions/workflows/ci.yml/badge.svg)](https://github.com/ak1008yaa/nextjs-boilerplate/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-First, run the development server:
+A small, opinionated Next.js starter that is ready to ship: App Router,
+strict TypeScript, Tailwind CSS 4, ESLint, a CI pipeline and automated
+dependency updates.
+
+## Stack
+
+| Layer      | Choice                        |
+| ---------- | ----------------------------- |
+| Framework  | Next.js 16 (App Router)       |
+| Runtime    | React 19                      |
+| Language   | TypeScript 5                  |
+| Styling    | Tailwind CSS 4                |
+| Linting    | ESLint 9 + eslint-config-next |
+| CI         | GitHub Actions                |
+| Hosting    | Vercel                        |
+
+## Requirements
+
+- Node.js 22 LTS or newer
+- npm 10 or newer
+
+## Getting started
 
 ```bash
+git clone https://github.com/ak1008yaa/nextjs-boilerplate.git
+cd nextjs-boilerplate
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command             | Description                    |
+| ------------------- | ------------------------------ |
+| `npm run dev`       | Start the development server   |
+| `npm run build`     | Create a production build      |
+| `npm start`         | Serve the production build     |
+| `npm run lint`      | Run ESLint                     |
+| `npm run typecheck` | Type-check without emitting    |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/                  App Router routes, layout and global styles
+  layout.tsx          Root layout and metadata
+  page.tsx            Home route
+  globals.css         Tailwind entry point and theme tokens
+public/               Static assets served from the site root
+.github/workflows/    CI pipeline
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env.local` and adjust the values. Files ending in
+`.env.local` are ignored by git and must never be committed.
 
-## Deploy on Vercel
+Only variables prefixed with `NEXT_PUBLIC_` are exposed to the browser. Never
+put a secret in one of them. Server-only secrets belong in the hosting
+provider's environment settings.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Continuous integration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Every push and pull request to `main` runs a single `quality` job that installs
+dependencies, lints, type-checks and builds the project on Node.js 22. A red
+check blocks the merge.
+
+Dependabot opens grouped weekly pull requests for npm packages and GitHub
+Actions, so upgrades arrive as small, reviewable changes.
+
+## Deployment
+
+The project deploys to Vercel with zero configuration. Push to `main`, or
+connect the repository in the Vercel dashboard and keep the default build
+settings (`npm run build`, output `.next`).
+
+## License
+
+MIT © ATLAS-DEV. See [LICENSE](./LICENSE).
+
+---
+
+powered by [ATLAS-DEV](https://www.atlas-dev.pro)
